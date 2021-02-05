@@ -4,7 +4,8 @@
     <string name="form_berat_badan">Berat Badan Anda : (kg)</string>
     <string name="form_tinggi_badan">Tinggi Badan Anda : (cm)</string>
     <string name="form_button_hitung">Hitung BMI Anda</string>
-    <string name="form_hasil">...</string>
+    <string name="form_hasil">…</string>
+
 <!--    Login page -->
     <string name="welcome">Welcome to BMI Calculator</string>
     <string name="input_username">Username</string>
