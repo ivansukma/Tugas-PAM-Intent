@@ -14,6 +14,7 @@ public class CalculatorActivity extends AppCompatActivity implements View.OnClic
     private EditText edtTinggi;
     private Button btnHitung;
     private TextView tvHasil;
+    private TextView welcome_user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,6 +25,10 @@ public class CalculatorActivity extends AppCompatActivity implements View.OnClic
         edtTinggi = findViewById(R.id.edt_tinggi);
         btnHitung = findViewById(R.id.btn_hitung);
         tvHasil = findViewById(R.id.tv_hasil);
+        welcome_user = findViewById(R.id.welcome_user);
+
+        String welcome_message = "Welcome, " + getIntent().getStringExtra("username") + " :) ";
+        welcome_user.setText(welcome_message);
 
         btnHitung.setOnClickListener(this);
     }

@@ -9,8 +9,18 @@
     tools:context=".CalculatorActivity">
 
     <TextView
+        android:id="@+id/welcome_user"
+        android:layout_width="357dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="150dp"
+        android:padding="0dp"
+        android:text="@string/welcome"
+        android:textSize="25sp" />
+
+    <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
         android:text="@string/form_berat_badan"/>
 
     <EditText
@@ -23,6 +33,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
         android:text="@string/form_tinggi_badan"/>
 
     <EditText
@@ -36,6 +47,7 @@
         android:id="@+id/btn_hitung"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
         android:text="@string/form_button_hitung"/>
 
     <TextView
