@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">BMI Calculator</string>
+    <string name="form_berat_badan">Berat Badan Anda : (kg)</string>
+    <string name="form_tinggi_badan">Tinggi Badan Anda : (cm)</string>
+    <string name="form_button_hitung">Hitung IBM Anda</string>
+    <string name="form_hasil">...</string>
 </resources>
