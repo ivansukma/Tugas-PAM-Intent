@@ -13,6 +13,8 @@ import android.widget.TextView;
 
 public class CalculatorActivity extends AppCompatActivity implements View.OnClickListener {
 
+    public String extra_kategori;
+
     private EditText edtBerat;
     private EditText edtTinggi;
     private Button btnHitung;
@@ -35,6 +37,7 @@ public class CalculatorActivity extends AppCompatActivity implements View.OnClic
         String welcome_message = "Welcome, " + getIntent().getStringExtra("username") + " :) ";
         welcome_user.setText(welcome_message);
 
+
         btnHitung.setOnClickListener(this);
         tips_activity.setOnClickListener(this);
 
@@ -43,10 +46,6 @@ public class CalculatorActivity extends AppCompatActivity implements View.OnClic
     @SuppressLint("DefaultLocale")
     @Override
     public void onClick(View v) {
-        if (v.getId()==R.id.BtnTips){
-            Intent i = new Intent(CalculatorActivity.this, TipsActivity.class);
-            startActivity(i);
-        }
         if (v.getId() == R.id.btn_hitung) {
             String inputBerat = edtBerat.getText().toString().trim();
             String inputTinggi = edtTinggi.getText().toString().trim();
@@ -60,6 +59,13 @@ public class CalculatorActivity extends AppCompatActivity implements View.OnClic
 
             String result_message = String.format("%.2f", imb) + " (" + kategori + ")";
             tvHasil.setText(result_message);
+            extra_kategori = kategori;
+        }
+
+        if (v.getId()==R.id.BtnTips){
+            Intent i = new Intent(CalculatorActivity.this, TipsActivity.class);
+            i.putExtra("kategori", extra_kategori);
+            startActivity(i);
         }
     }
 }
