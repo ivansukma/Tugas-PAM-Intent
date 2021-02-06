@@ -3,6 +3,7 @@ package com.ftiuksw.bmicalculator;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -15,6 +16,7 @@ public class CalculatorActivity extends AppCompatActivity implements View.OnClic
     private EditText edtBerat;
     private EditText edtTinggi;
     private Button btnHitung;
+    private Button tips_activity;
     private TextView tvHasil;
     private TextView welcome_user;
 
@@ -28,16 +30,23 @@ public class CalculatorActivity extends AppCompatActivity implements View.OnClic
         btnHitung = findViewById(R.id.btn_hitung);
         tvHasil = findViewById(R.id.tv_hasil);
         welcome_user = findViewById(R.id.welcome_user);
+        tips_activity = findViewById(R.id.BtnTips);
 
         String welcome_message = "Welcome, " + getIntent().getStringExtra("username") + " :) ";
         welcome_user.setText(welcome_message);
 
         btnHitung.setOnClickListener(this);
+        tips_activity.setOnClickListener(this);
+
     }
 
     @SuppressLint("DefaultLocale")
     @Override
     public void onClick(View v) {
+        if (v.getId()==R.id.BtnTips){
+            Intent i = new Intent(CalculatorActivity.this, TipsActivity.class);
+            startActivity(i);
+        }
         if (v.getId() == R.id.btn_hitung) {
             String inputBerat = edtBerat.getText().toString().trim();
             String inputTinggi = edtTinggi.getText().toString().trim();
