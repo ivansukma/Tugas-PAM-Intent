@@ -18,15 +18,11 @@ public class TipsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tips);
 
-        Intent intent = getIntent();
-        String action = intent.getAction();
-        String type = intent.getType();
-
         String tipsLine1 = "0", tipsLine2 = "0",
                 tipsLine3 = "0", tipsLine4 = "0", tipsLine5 = "0", tipsLine6 = "0", tipsLine7 = "0";
 
         String kategori = getIntent().getStringExtra("kategori");
-        if (kategori.equals("OVERWEIGHT") == true) {
+        if (kategori.equals("OVERWEIGHT")) {
             tipsLine1 = "Jangan lupa minum air sebelum makan";
             tipsLine2 = "Jangan lupa sarapan";
             tipsLine3 = "Makanlah dalam porsi kecil";
@@ -34,7 +30,7 @@ public class TipsActivity extends AppCompatActivity {
             tipsLine5 = "Tidak perlu menghindari makanan tertentu";
             tipsLine6 = "Tidurlah yang cukup";
             tipsLine7 = "Bergerak aktif";
-        } else if(kategori.equals("UNDERWEIGHT") == true){
+        } else if(kategori.equals("UNDERWEIGHT")){
             tipsLine1 = "Mengkonsumsi makanan lebih sering";
             tipsLine2 = "Memilih makanan dengan lebih cermat";
             tipsLine3 = "Konsumsi makanan berlemak baik";

@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -50,22 +51,42 @@ public class CalculatorActivity extends AppCompatActivity implements View.OnClic
         if (v.getId() == R.id.btn_hitung) {
             String inputBerat = edtBerat.getText().toString().trim();
             String inputTinggi = edtTinggi.getText().toString().trim();
-            double imb = Double.valueOf(inputBerat) / (Double.valueOf(inputTinggi) * Double.valueOf(inputTinggi) / 10000);
-            String kategoriIMB = "IDEAL";
-            if (imb >= 25.1) {
-                kategoriIMB = "OVERWEIGHT";
-            } else if (imb < 18.5) {
-                kategoriIMB = "UNDERWEIGHT";
+            boolean isEmpetyFields = false;
+            boolean isNotZero = false;
+
+            if (TextUtils.isEmpty(inputBerat)) {
+                isEmpetyFields = true;
+                edtBerat.setError("Mohon isikan value");
             }
-            throwKategori = kategoriIMB;
 
-            String result_message = String.format("%.2f", imb) + " (" + kategoriIMB + ")";
-            tvHasil.setText(result_message);
+            if (TextUtils.isEmpty(inputTinggi)) {
+                isEmpetyFields = true;
+                edtTinggi.setError("Mohon isikan value");
+            }
 
-            if (throwKategori.equals("IDEAL")) {
-                tips_activity.setVisibility(View.INVISIBLE);
-            } else {
-                tips_activity.setVisibility(View.VISIBLE);
+            if (inputTinggi.equals("0")) {
+                isNotZero = true;
+                edtTinggi.setError("Tidak bisa dibagi 0");
+            }
+
+            if(!isEmpetyFields && !isNotZero) {
+                double imb = Double.valueOf(inputBerat) / (Double.valueOf(inputTinggi) * Double.valueOf(inputTinggi) / 10000);
+                String kategoriIMB = "IDEAL";
+                if (imb >= 25.1) {
+                    kategoriIMB = "OVERWEIGHT";
+                } else if (imb < 18.5) {
+                    kategoriIMB = "UNDERWEIGHT";
+                }
+                throwKategori = kategoriIMB;
+
+                String result_message = String.format("%.2f", imb) + " (" + kategoriIMB + ")";
+                tvHasil.setText(result_message);
+
+                if (throwKategori.equals("IDEAL")) {
+                    tips_activity.setVisibility(View.INVISIBLE);
+                } else {
+                    tips_activity.setVisibility(View.VISIBLE);
+                }
             }
         }
 
