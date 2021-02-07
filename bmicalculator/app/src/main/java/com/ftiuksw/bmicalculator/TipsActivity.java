@@ -1,5 +1,7 @@
 package com.ftiuksw.bmicalculator;
 
+import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
@@ -8,46 +10,56 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class TipsActivity extends AppCompatActivity {
 
-    private TextView testKategori;
-    private TextView kurus_1;
-    private TextView kurus_2;
-    private TextView kurus_3;
-    private TextView kurus_4;
-    private TextView kurus_5;
-    private TextView kurus_6;
-    private TextView kurus_7;
-    private TextView kurus_8;
+    private TextView tvTipsHeader, tvLine1, tvLine2, tvLine3, tvLine4, tvLine5, tvLine6, tvLine7;
 
-    public TipsActivity() {
-    }
-
+    @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tips);
 
-        testKategori = findViewById(R.id.textView6);
-        kurus_1 = findViewById(R.id.textView7);
-        kurus_2 = findViewById(R.id.textView8);
-        kurus_3 = findViewById(R.id.textView9);
-        kurus_4 = findViewById(R.id.textView10);
-        kurus_5 = findViewById(R.id.textView11);
-        kurus_6 = findViewById(R.id.textView12);
-        kurus_7 = findViewById(R.id.textView13);
-        kurus_8 = findViewById(R.id.textView14);
+        Intent intent = getIntent();
+        String action = intent.getAction();
+        String type = intent.getType();
 
-        String testAja = getIntent().getStringExtra("kategori");
-        testKategori.setText(testAja);
+        String tipsLine1 = "0", tipsLine2 = "0",
+                tipsLine3 = "0", tipsLine4 = "0", tipsLine5 = "0", tipsLine6 = "0", tipsLine7 = "0";
 
-        if (testAja == "OVERWEIGHT"){
-            kurus_1.setVisibility(View.INVISIBLE);
-            kurus_2.setVisibility(View.INVISIBLE);
-            kurus_3.setVisibility(View.INVISIBLE);
-            kurus_4.setVisibility(View.INVISIBLE);
-            kurus_5.setVisibility(View.INVISIBLE);
-            kurus_6.setVisibility(View.INVISIBLE);
-            kurus_7.setVisibility(View.INVISIBLE);
-            kurus_8.setVisibility(View.INVISIBLE);
+        String kategori = getIntent().getStringExtra("kategori");
+        if (kategori.equals("OVERWEIGHT") == true) {
+            tipsLine1 = "Jangan lupa minum air sebelum makan";
+            tipsLine2 = "Jangan lupa sarapan";
+            tipsLine3 = "Makanlah dalam porsi kecil";
+            tipsLine4 = "Makan secara perlahan";
+            tipsLine5 = "Tidak perlu menghindari makanan tertentu";
+            tipsLine6 = "Tidurlah yang cukup";
+            tipsLine7 = "Bergerak aktif";
+        } else if(kategori.equals("UNDERWEIGHT") == true){
+            tipsLine1 = "Mengkonsumsi makanan lebih sering";
+            tipsLine2 = "Memilih makanan dengan lebih cermat";
+            tipsLine3 = "Konsumsi makanan berlemak baik";
+            tipsLine4 = "Memperbanyak minum susu";
+            tipsLine5 = "Berolahraga secara rutin";
+            tipsLine6 = "Tidak merokok";
+            tipsLine7 = "Beristirahat yang cukup";
         }
+
+        tvTipsHeader = findViewById(R.id.tv_tips_header);
+        tvLine1 = findViewById(R.id.tv_tips_line1);
+        tvLine2 = findViewById(R.id.tv_tips_line2);
+        tvLine3 = findViewById(R.id.tv_tips_line3);
+        tvLine4 = findViewById(R.id.tv_tips_line4);
+        tvLine5 = findViewById(R.id.tv_tips_line5);
+        tvLine6 = findViewById(R.id.tv_tips_line6);
+        tvLine7 = findViewById(R.id.tv_tips_line7);
+
+        tvTipsHeader.setText("Saran bagi Anda yang " + kategori);
+        tvLine1.setText(tipsLine1);
+        tvLine2.setText(tipsLine2);
+        tvLine3.setText(tipsLine3);
+        tvLine4.setText(tipsLine4);
+        tvLine5.setText(tipsLine5);
+        tvLine6.setText(tipsLine6);
+        tvLine7.setText(tipsLine7);
     }
 }

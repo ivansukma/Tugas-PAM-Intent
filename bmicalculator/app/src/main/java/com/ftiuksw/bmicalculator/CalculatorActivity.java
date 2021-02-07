@@ -13,7 +13,8 @@ import android.widget.TextView;
 
 public class CalculatorActivity extends AppCompatActivity implements View.OnClickListener {
 
-    public String extra_kategori;
+//    public static final String EXTRA_KATEGORI = "extra_kategori";
+    public String throwKategori;
 
     private EditText edtBerat;
     private EditText edtTinggi;
@@ -36,7 +37,7 @@ public class CalculatorActivity extends AppCompatActivity implements View.OnClic
 
         String welcome_message = "Welcome, " + getIntent().getStringExtra("username") + " :) ";
         welcome_user.setText(welcome_message);
-
+        tips_activity.setVisibility(View.INVISIBLE);
 
         btnHitung.setOnClickListener(this);
         tips_activity.setOnClickListener(this);
@@ -50,21 +51,27 @@ public class CalculatorActivity extends AppCompatActivity implements View.OnClic
             String inputBerat = edtBerat.getText().toString().trim();
             String inputTinggi = edtTinggi.getText().toString().trim();
             double imb = Double.valueOf(inputBerat) / (Double.valueOf(inputTinggi) * Double.valueOf(inputTinggi) / 10000);
-            String kategori = "IDEAL";
+            String kategoriIMB = "IDEAL";
             if (imb >= 25.1) {
-                kategori = "OVERWEIGHT";
+                kategoriIMB = "OVERWEIGHT";
             } else if (imb < 18.5) {
-                kategori = "UNDERWEIGHT";
+                kategoriIMB = "UNDERWEIGHT";
             }
+            throwKategori = kategoriIMB;
 
-            String result_message = String.format("%.2f", imb) + " (" + kategori + ")";
+            String result_message = String.format("%.2f", imb) + " (" + kategoriIMB + ")";
             tvHasil.setText(result_message);
-            extra_kategori = kategori;
+
+            if (throwKategori.equals("IDEAL")) {
+                tips_activity.setVisibility(View.INVISIBLE);
+            } else {
+                tips_activity.setVisibility(View.VISIBLE);
+            }
         }
 
         if (v.getId()==R.id.BtnTips){
             Intent i = new Intent(CalculatorActivity.this, TipsActivity.class);
-            i.putExtra("kategori", extra_kategori);
+            i.putExtra("kategori", throwKategori);
             startActivity(i);
         }
     }
