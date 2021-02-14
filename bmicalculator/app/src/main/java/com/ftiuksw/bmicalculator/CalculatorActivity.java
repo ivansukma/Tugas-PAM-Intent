@@ -14,8 +14,6 @@ import android.widget.TextView;
 
 
 public class CalculatorActivity extends AppCompatActivity implements View.OnClickListener {
-
-//    public static final String EXTRA_KATEGORI = "extra_kategori";
     public String throwKategori;
 
     private EditText edtBerat;
@@ -70,7 +68,7 @@ public class CalculatorActivity extends AppCompatActivity implements View.OnClic
             String inputBerat = edtBerat.getText().toString().trim();
             String inputTinggi = edtTinggi.getText().toString().trim();
             boolean isEmpetyFields = false;
-            boolean isNotZero = false;
+            boolean isZero = false;
 
             if (TextUtils.isEmpty(inputBerat)) {
                 isEmpetyFields = true;
@@ -83,11 +81,11 @@ public class CalculatorActivity extends AppCompatActivity implements View.OnClic
             }
 
             if (inputTinggi.equals("0")) {
-                isNotZero = true;
+                isZero = true;
                 edtTinggi.setError("Tidak bisa dibagi 0");
             }
 
-            if(!isEmpetyFields && !isNotZero) {
+            if(!isEmpetyFields && !isZero) {
                 double imb = Double.valueOf(inputBerat) / (Double.valueOf(inputTinggi) * Double.valueOf(inputTinggi) / 10000);
                 String kategoriIMB = "IDEAL";
                 if (imb >= 25.1) {
