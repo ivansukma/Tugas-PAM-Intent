@@ -2,6 +2,7 @@ package com.ftiuksw.bmicalculator;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
@@ -10,7 +11,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class TipsActivity extends AppCompatActivity {
 
-    private TextView tvTipsHeader, tvLine1, tvLine2, tvLine3, tvLine4, tvLine5, tvLine6, tvLine7;
+    private TextView tvTipsHeader, tvLine1, tvLine2, tvLine3, tvLine4, tvLine5, tvLine6, tvLine7, backtocalculator;
+    private View background;
+    public String tema;
 
     @SuppressLint("SetTextI18n")
     @Override
@@ -22,6 +25,23 @@ public class TipsActivity extends AppCompatActivity {
                 tipsLine3 = "0", tipsLine4 = "0", tipsLine5 = "0", tipsLine6 = "0", tipsLine7 = "0";
 
         String kategori = getIntent().getStringExtra("kategori");
+
+        backtocalculator = findViewById(R.id.backtocalculator);
+        background = findViewById(R.id.background);
+
+        tema= getIntent().getStringExtra("tema");
+
+        if (tema.equalsIgnoreCase("blue")){
+            backtocalculator.setTextColor(Color.parseColor("#5D7F98"));
+            background.setBackgroundResource(R.drawable.bgblue);
+        } else {
+            backtocalculator.setTextColor(Color.parseColor("#D5A55D"));
+            background.setBackgroundResource(R.drawable.bgorange);
+        }
+
+        background.setScaleX(3);
+        background.setScaleY(3);
+
         if (kategori.equals("OVERWEIGHT")) {
             tipsLine1 = "Jangan lupa minum air sebelum makan";
             tipsLine2 = "Jangan lupa sarapan";
@@ -57,5 +77,13 @@ public class TipsActivity extends AppCompatActivity {
         tvLine5.setText(tipsLine5);
         tvLine6.setText(tipsLine6);
         tvLine7.setText(tipsLine7);
+
+        backtocalculator.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(TipsActivity.this, CalculatorActivity.class);
+                startActivity(i);
+            }
+        });
     }
 }

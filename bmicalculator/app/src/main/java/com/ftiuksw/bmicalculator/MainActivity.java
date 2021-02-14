@@ -3,6 +3,7 @@ package com.ftiuksw.bmicalculator;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -16,7 +17,7 @@ public class MainActivity extends AppCompatActivity {
     private EditText username;
     private EditText password;
     private Button login_button;
-
+    private View background;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -25,6 +26,20 @@ public class MainActivity extends AppCompatActivity {
         username = findViewById(R.id.username);
         password = findViewById(R.id.password);
         login_button = findViewById(R.id.login_button);
+        background = findViewById(R.id.background);
+
+        String tema= getIntent().getStringExtra("tema");
+
+        if (tema.equalsIgnoreCase("blue")){
+            login_button.setTextColor(Color.parseColor("#5D7F98"));
+            background.setBackgroundResource(R.drawable.bgblue);
+        } else {
+            login_button.setTextColor(Color.parseColor("#D5A55D"));
+            background.setBackgroundResource(R.drawable.bgorange);
+        }
+
+        background.setScaleX(3);
+        background.setScaleY(3);
 
         login_button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -35,6 +50,7 @@ public class MainActivity extends AppCompatActivity {
                 if (status==1){
                     Intent i = new Intent(MainActivity.this, CalculatorActivity.class);
                     i.putExtra("username", username.getText().toString());
+                    i.putExtra("tema", tema);
                     startActivity(i);
                     Toast.makeText(getApplicationContext(),"Login Succesful",Toast.LENGTH_LONG).show();
                 }
@@ -77,6 +93,7 @@ public class MainActivity extends AppCompatActivity {
         } catch (IOException e) {
             return 5;
         }
+
 
     }
 
